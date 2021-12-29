@@ -2,7 +2,7 @@ import React from 'react'
 
 export const Footer: React.FC = () => {
   return (
-    <div className={'bg-zinc-500'}>
+    <footer className={'bg-zinc-500'}>
       <div className={'pt-4 md:flex md:items-center md:justify-center '}>
         <div className={'flex flex-row'}>
           <div onClick={() => (window.location.href = 'https://github.com/TimAufdemKampe')}>
@@ -13,6 +13,6 @@ export const Footer: React.FC = () => {
       <div className={'pt-2 pb-4 md:flex md:items-center md:justify-center '}>
         <div className={'whitespace-nowrap inline-flex items-center justify-center px-4 py-2 text-xs font-medium text-white bg-zinc-500'}>Copyright Tim Auf dem Kampe</div>
       </div>
-    </div>
+    </footer>
   )
 }
