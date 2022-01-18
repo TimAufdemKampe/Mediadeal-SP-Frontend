@@ -1,8 +1,13 @@
 import React from 'react'
+import { useCookies } from 'react-cookie'
 import { useHistory } from 'react-router-dom'
+
+import { useGlobalState } from '../App'
 
 export const Header: React.FC = () => {
   const history = useHistory()
+  const [, , removeCookies] = useCookies(['page-access'])
+  const [isAuthorized, setIsAuthorized] = useGlobalState('authorized')
 
   return (
     <header className={'flex justify-between items-center border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10 px-5'}>
@@ -21,8 +26,14 @@ export const Header: React.FC = () => {
           className={
             'ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-zinc-500 hover:bg-zinc-600 hover:cursor-pointer'
           }
-          onClick={() => history.push('/admin')}>
-          Admin Login
+          onClick={() => {
+            if (isAuthorized) {
+              setIsAuthorized(false)
+              history.push('/')
+              removeCookies('page-access')
+            } else history.push('/admin')
+          }}>
+          {isAuthorized ? 'Ausloggen' : 'Admin Login'}
         </div>
       </div>
     </header>
